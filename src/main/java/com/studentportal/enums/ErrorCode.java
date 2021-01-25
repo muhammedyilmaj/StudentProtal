@@ -1,0 +1,5 @@
+package com.studentportal.enums;
+
+public enum ErrorCode {
+    STUSER,STUREPO,TEASER,TEAREPO,DEPSER,DEPREPO,FACSER,FACREPO,LESSER,LESREPO,GUASER,GUAREPO
+}
