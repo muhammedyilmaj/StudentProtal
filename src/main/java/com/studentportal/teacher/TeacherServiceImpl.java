@@ -4,33 +4,38 @@ import com.studentportal.exception.StudentPortalException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
     private TeacherRepo teacherRepo;
-    public TeacherServiceImpl(TeacherRepo teacherRepo){
-        this.teacherRepo=teacherRepo;
+    private TeacherMapperImpl teacherMapper;
+    public TeacherServiceImpl(TeacherRepo teacherRepo, TeacherMapperImpl teacherMapper){
+        this.teacherRepo = teacherRepo;
+        this.teacherMapper = teacherMapper;
     }
     @Override
-    public Teacher getById(Long id) throws StudentPortalException {
+    public TeacherDto getById(Long id) throws StudentPortalException {
         try {
-            return teacherRepo.getOne(id);
+            return teacherMapper.teacherToTeacherDto(teacherRepo.getOne(id));
         }catch (Exception e){
             throw new StudentPortalException("Problem occurs in getById method on TeacherServiceImpl",e);
         }
     }
     @Override
-    public List<Teacher> getAll() throws StudentPortalException {
+    public List<TeacherDto> getAll() throws StudentPortalException {
         try {
-            return teacherRepo.findAll();
+            return teacherRepo.findAll().stream()
+                    .map(teacherMapper::teacherToTeacherDto)
+                    .collect(Collectors.toList());
         }catch (Exception e){
             throw new StudentPortalException("Problem occurs in getAll method on TeacherServiceImpl",e);
         }
     }
     @Override
-    public Teacher add(Teacher teacher) throws StudentPortalException {
+    public TeacherDto add(Teacher teacher) throws StudentPortalException {
         try {
-            return teacherRepo.save(teacher);
+            return teacherMapper.teacherToTeacherDto(teacherRepo.save(teacher));
         }catch (Exception e){
             throw new StudentPortalException("Problem occurs in add method on TeacherServiceImpl",e);
         }
@@ -38,7 +43,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public boolean delete(Long id) throws StudentPortalException {
         try {
-            Teacher teacher=teacherRepo.getOne(id);
+            Teacher teacher = teacherRepo.getOne(id);
             teacherRepo.delete(teacher);
             return !teacherRepo.getOne(id).getId().equals(id);
         }catch (Exception e){

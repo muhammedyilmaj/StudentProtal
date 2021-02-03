@@ -5,8 +5,8 @@ import com.studentportal.exception.StudentPortalException;
 import java.util.List;
 
 public interface TeacherService {
-    Teacher getById(Long id) throws StudentPortalException;
-    List<Teacher> getAll() throws StudentPortalException;
-    Teacher add(Teacher teacher) throws StudentPortalException;
+    TeacherDto getById(Long id) throws StudentPortalException;
+    List<TeacherDto> getAll() throws StudentPortalException;
+    TeacherDto add(Teacher teacher) throws StudentPortalException;
     boolean delete(Long id) throws StudentPortalException;
 }
