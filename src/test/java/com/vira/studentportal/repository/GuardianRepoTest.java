@@ -35,8 +35,8 @@ public class GuardianRepoTest {
 
     }
     Guardian guardian = new Guardian();
-    Student student=new Student();
-    List<Student> studentList=new ArrayList<>();
+    Student student = new Student();
+    List<Student> studentList = new ArrayList<>();
     @Test
     public void ADD_AND_GET_STUDENT_GUARDIAN_BY_ID(){
         guardian =testEntityManager.persistAndFlush(guardian);

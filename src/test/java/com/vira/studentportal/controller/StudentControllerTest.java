@@ -3,6 +3,7 @@ package com.vira.studentportal.controller;
 import com.studentportal.exception.StudentPortalException;
 import com.studentportal.student.Student;
 import com.studentportal.student.StudentController;
+import com.studentportal.student.StudentDto;
 import com.studentportal.student.StudentServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,17 +27,21 @@ public class StudentControllerTest {
         student.setGrade("ne bilem");
         student.setName("ragors");
         student.setId(4L);
+        studentDto.setGrade("ne bilem");
+        studentDto.setName("ragors");
+        studentDto.setId(4L);
     }
+    StudentDto studentDto = new StudentDto();
     Student student = new Student();
     @Test
     public void Add_Student() throws StudentPortalException {
-        Mockito.when(studentService.save(Mockito.any(Student.class))).thenReturn(student);
+        Mockito.when(studentService.save(Mockito.any(Student.class))).thenReturn(studentDto);
         assertThat(studentController.add(student).getStatusCodeValue()).isEqualTo(201);
     }
 
     @Test
     public void Get_Student_By_Student_Id() throws StudentPortalException {
-        Mockito.when(studentService.getById(Mockito.any(Long.class))).thenReturn(student);
+        Mockito.when(studentService.getById(Mockito.any(Long.class))).thenReturn(studentDto);
         assertThat(studentController.getById(student.getId()).getStatusCodeValue()).isEqualTo(200);
     }
 

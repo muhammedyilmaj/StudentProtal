@@ -4,6 +4,7 @@ import com.studentportal.exception.StudentPortalException;
 import com.studentportal.student.Student;
 import com.studentportal.teacher.Teacher;
 import com.studentportal.teacher.TeacherController;
+import com.studentportal.teacher.TeacherMapperImpl;
 import com.studentportal.teacher.TeacherServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +20,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TeacherControllerTest {
+
+    @Mock
+    TeacherMapperImpl teacherMapper;
+
     @Mock
     TeacherServiceImpl teacherService;
     @InjectMocks
@@ -40,13 +45,13 @@ public class TeacherControllerTest {
     List<Student> studentList= new ArrayList<>();
     @Test
     public void Add_Teacher() throws StudentPortalException {
-        Mockito.when(teacherService.add(Mockito.any(Teacher.class))).thenReturn(teacher);
+        Mockito.when(teacherService.add(Mockito.any(Teacher.class))).thenReturn(teacherMapper.teacherToTeacherDto(teacher));
         assertThat(teacherController.add(teacher).getStatusCodeValue()).isEqualTo(201);
     }
 
     @Test
     public void Get_Teacher_By_Teacher_Id() throws StudentPortalException {
-        Mockito.when(teacherService.getById(Mockito.any(Long.class))).thenReturn(teacher);
+        Mockito.when(teacherService.getById(Mockito.any(Long.class))).thenReturn(teacherMapper.teacherToTeacherDto(teacher));
         assertThat(teacherController.getById(teacher.getId()).getStatusCodeValue()).isEqualTo(200);
     }
 

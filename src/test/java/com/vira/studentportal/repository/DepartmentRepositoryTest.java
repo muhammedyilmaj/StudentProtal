@@ -32,14 +32,14 @@ public class DepartmentRepositoryTest {
     Faculty faculty;
     @Before
     public void setup(){
-        department= new Department();
-        departmentList= new ArrayList<>();
-        faculty=new Faculty();
+        department = new Department();
+        departmentList = new ArrayList<>();
+        faculty = new Faculty();
         department.setDepartmentName("Mock");
         department.setDepartmentType("MASTER");
         faculty.setFacultyName("deneme");
         departmentList.add(department);
-        faculty=testEntityManager.persistAndFlush(faculty);
+        faculty = testEntityManager.persistAndFlush(faculty);
         department.setFaculty(faculty);
         faculty.setDepartment(departmentList);
     }
@@ -51,7 +51,7 @@ public class DepartmentRepositoryTest {
     }
     @Test
     public void GET_DEPARTMENT_BY_DEPARTMENT_NAME(){
-        department=testEntityManager.persistAndFlush(department);
+        department = testEntityManager.persistAndFlush(department);
         assertThat(departmentRepo.getDepartmentByDepartmentName(department.getDepartmentName()).getDepartmentName()).isEqualTo(department.getDepartmentName());
     }
 

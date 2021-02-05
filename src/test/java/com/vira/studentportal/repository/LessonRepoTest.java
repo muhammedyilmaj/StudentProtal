@@ -24,7 +24,7 @@ public class LessonRepoTest {
     LessonRepo lessonRepo;
     @Before
     public void setup(){
-        lesson=new Lesson();
+        lesson = new Lesson();
         lesson.setLessonName("kimya");
     }
     Lesson lesson;

@@ -4,27 +4,33 @@ import com.studentportal.exception.StudentPortalException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class FacultyServiceImpl implements FacultyService {
+
+    private FacultyMapper facultyMapper;
     private FacultyRepo facultyRepo;
 
-    public FacultyServiceImpl(FacultyRepo facultyRepo) {
+    public FacultyServiceImpl(FacultyRepo facultyRepo, FacultyMapper facultyMapper) {
+
         this.facultyRepo = facultyRepo;
+        this.facultyMapper = facultyMapper;
     }
 
     @Override
-    public Faculty getById(Long id) throws StudentPortalException {
+    public FacultyDto getById(Long id) throws StudentPortalException {
         try {
-            return facultyRepo.getOne(id);
+            return facultyMapper.facultyToFacultyDto(facultyRepo.getOne(id));
         } catch (Exception e) {
             throw new StudentPortalException("Problem occurs in getById method on FacultyServiceImpl", e);
         }
     }
 
     @Override
-    public List<Faculty> getAll() throws StudentPortalException {
+    public List<FacultyDto> getAll() throws StudentPortalException {
         try {
-            return facultyRepo.findAll();
+            return facultyRepo.findAll().stream().map(facultyMapper::facultyToFacultyDto).collect(Collectors.toList());
         } catch (Exception e) {
             throw new StudentPortalException("Problem occurs in getAll method on FacultyServiceImpl", e);
         }
@@ -42,9 +48,9 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public Faculty add(Faculty faculty) throws StudentPortalException {
+    public FacultyDto add(Faculty faculty) throws StudentPortalException {
         try {
-           return facultyRepo.save(faculty);
+           return facultyMapper.facultyToFacultyDto(facultyRepo.save(faculty));
         } catch (Exception e) {
             throw new StudentPortalException("Problem occurs in add method on FacultyServiceImpl", e);
         } }

@@ -1,6 +1,6 @@
 package com.studentportal.faculty;
 
-import com.studentportal.department.DepartmentDto;
+import com.studentportal.department.Department;
 import lombok.Data;
 import java.util.List;
 
@@ -9,6 +9,6 @@ public class FacultyDto {
 
     private Long id;
     private String facultyName;
-    List<DepartmentDto> department;
+    List<Department> department;
 
 }

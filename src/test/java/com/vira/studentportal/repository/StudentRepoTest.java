@@ -28,7 +28,7 @@ public class StudentRepoTest {
         student.setName("ragors");
 
     }
-    Student student=new Student();
+    Student student = new Student();
     @Test
     public void ADD_AND_GET_STUDENT_BY_ID(){
         student=testEntityManager.persistAndFlush(student);

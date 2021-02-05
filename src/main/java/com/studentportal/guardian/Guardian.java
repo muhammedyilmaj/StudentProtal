@@ -15,14 +15,14 @@ import java.util.List;
 public class Guardian {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "parent_id")
+    @Column(name = "guardian_id")
     private Long id;
     @Column(name = "name")
     @NotNull
     private String name;
 
     @Column(name = "students")
-    @OneToMany(mappedBy = "parents")
+    @OneToMany(mappedBy = "guardian")
     private List<Student> students;
 
 }

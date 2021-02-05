@@ -24,7 +24,7 @@ public class Lesson {
     @NotNull
     private String lessonName;
     @Transient
-    private List<String> lessoncClass;
+    private List<String> lessonClass;
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;

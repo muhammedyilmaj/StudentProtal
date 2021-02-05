@@ -1,6 +1,6 @@
 package com.studentportal.guardian;
 
-import com.studentportal.student.StudentDto;
+import com.studentportal.student.Student;
 import lombok.Data;
 import java.util.List;
 
@@ -9,6 +9,6 @@ public class GuardianDto {
 
     private Long id;
     private String name;
-    private List<StudentDto> students;
+    private List<Student> students;
 
 }

@@ -21,8 +21,8 @@ public class StudentController {
         this.studentServiceImpl = studentServiceImpl;
     }
     @GetMapping("/{studentId}")
-    public ResponseEntity<Student> getById(@PathVariable("studentId") Long studentId) throws StudentPortalException {
-        Student student= studentServiceImpl.getById(studentId);
+    public ResponseEntity<StudentDto> getById(@PathVariable("studentId") Long studentId) throws StudentPortalException {
+        StudentDto student= studentServiceImpl.getById(studentId);
         if(student.getId().equals(studentId)){
             return new ResponseEntity<>(student,HttpStatus.OK);
         }else
@@ -32,15 +32,15 @@ public class StudentController {
     }
     @PostMapping
     public ResponseEntity<Void> add(@RequestBody Student student) throws StudentPortalException {
-        Student responseStudent=studentServiceImpl.save(student);
+        StudentDto responseStudent=studentServiceImpl.save(student);
         if(responseStudent.getName().equals(student.getName())){
             return new ResponseEntity<>(HttpStatus.CREATED);}
          else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping
-    public ResponseEntity<List<Student>> getAll() throws StudentPortalException {
-        List<Student> students= studentServiceImpl.getAll();
+    public ResponseEntity<List<StudentDto>> getAll() throws StudentPortalException {
+        List<StudentDto> students= studentServiceImpl.getAll();
         if(students.size()>=1){
             return new ResponseEntity<>(students,HttpStatus.OK);
         }

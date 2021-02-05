@@ -1,9 +1,9 @@
 package com.studentportal.lesson;
 
 
-import com.studentportal.department.DepartmentDto;
-import com.studentportal.student.StudentDto;
-import com.studentportal.teacher.TeacherDto;
+import com.studentportal.department.Department;
+import com.studentportal.student.Student;
+import com.studentportal.teacher.Teacher;
 import lombok.Data;
 import java.util.List;
 
@@ -13,9 +13,9 @@ public class LessonDto {
     private Long id;
 
     private String lessonName;
-    private List<String> lessoncClass;
-    private DepartmentDto department;
-    private List<TeacherDto> teachers;
-    private List<StudentDto> students;
+    private List<String> lessonClass;
+    private Department department;
+    private List<Teacher> teachers;
+    private List<Student> students;
 
 }

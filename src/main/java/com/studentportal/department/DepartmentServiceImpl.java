@@ -1,6 +1,7 @@
 package com.studentportal.department;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.studentportal.exception.StudentPortalException;
 import lombok.extern.slf4j.Slf4j;
@@ -8,30 +9,33 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
+
+    private DepartmentMapperImpl departmentMapper;
     private DepartmentRepo departmentRepo;
-    public DepartmentServiceImpl(DepartmentRepo departmentRepo){
-        this.departmentRepo=departmentRepo;
+    public DepartmentServiceImpl(DepartmentRepo departmentRepo, DepartmentMapperImpl departmentMapper){
+        this.departmentRepo = departmentRepo;
+        this.departmentMapper = departmentMapper;
     }
     @Override
-    public Department getById(Long id) throws StudentPortalException {
+    public DepartmentDto getById(Long id) throws StudentPortalException {
         try {
-        return departmentRepo.getOne(id);
+            return departmentMapper.departmentToDepartmentDto(departmentRepo.getOne(id));
         }catch (Exception e){
             throw new StudentPortalException("Problem occurs in getAll method on DepartmentServiceImpl",e);
         }
     }
     @Override
-    public List<Department> getAll() throws StudentPortalException {
+    public List<DepartmentDto> getAll() throws StudentPortalException {
         try{
-            return departmentRepo.findAll();
+            return departmentRepo.findAll().stream().map(departmentMapper::departmentToDepartmentDto).collect(Collectors.toList());
         }catch (Exception e){
             throw new StudentPortalException("Exception occur occurs in getAll method on DepartmentServiceImpl",e);
         }
     }
     @Override
-    public Department save(Department department) throws StudentPortalException {
+    public DepartmentDto save(Department department) throws StudentPortalException {
         try {
-           return departmentRepo.save(department);
+           return departmentMapper.departmentToDepartmentDto(departmentRepo.save(department));
         } catch (Exception e){
             throw new StudentPortalException("Problem occurs in save method on DepartmentServiceImpl",e);
     }
@@ -47,9 +51,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
     }
     @Override
-    public Department getByName(String departmentName) throws StudentPortalException {
+    public DepartmentDto getByName(String departmentName) throws StudentPortalException {
         try {
-            return departmentRepo.getDepartmentByDepartmentName(departmentName);
+            return departmentMapper.departmentToDepartmentDto(departmentRepo.getDepartmentByDepartmentName(departmentName));
         }catch (Exception e){
             throw new StudentPortalException("Problem occurs in getByName method on DepartmentServiceImpl",e);
         }
