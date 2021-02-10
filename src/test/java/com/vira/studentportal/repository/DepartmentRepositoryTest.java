@@ -20,10 +20,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class DepartmentRepositoryTest {
+
     @Autowired
     TestEntityManager testEntityManager;
+
     @Resource
     DepartmentRepo departmentRepo;
 
@@ -39,13 +40,12 @@ public class DepartmentRepositoryTest {
         department.setDepartmentType("MASTER");
         faculty.setFacultyName("deneme");
         departmentList.add(department);
-        faculty = testEntityManager.persistAndFlush(faculty);
         department.setFaculty(faculty);
         faculty.setDepartment(departmentList);
     }
     @Test
     public void ADD_AND_GET_DEPARTMENT_BY_ID(){
-        department=testEntityManager.persistAndFlush(department);
+        department = testEntityManager.persistAndFlush(department);
         assertThat(departmentRepo.getOne(department.getId()).getDepartmentName()).isEqualTo(department.getDepartmentName());
 
     }

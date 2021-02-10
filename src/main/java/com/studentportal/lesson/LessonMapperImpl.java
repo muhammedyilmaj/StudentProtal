@@ -1,7 +1,5 @@
 package com.studentportal.lesson;
 
-import com.studentportal.faculty.Faculty;
-import com.studentportal.faculty.FacultyDto;
 import org.springframework.stereotype.Component;
 
 @Component
