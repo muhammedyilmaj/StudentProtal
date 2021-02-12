@@ -4,33 +4,41 @@ import com.studentportal.exception.StudentPortalException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
+
+    private StudentMapperImpl studentMapper;
     private StudentRepo studentRepo;
-    public StudentServiceImpl(StudentRepo studentRepo){
-        this.studentRepo=studentRepo;
+
+    public StudentServiceImpl(StudentMapperImpl studentMapper, StudentRepo studentRepo) {
+        this.studentMapper = studentMapper;
+        this.studentRepo = studentRepo;
     }
+
     @Override
-    public Student getById(Long id) throws StudentPortalException {
+    public StudentDto getById(Long id) throws StudentPortalException {
         try {
-        return studentRepo.getOne(id);
+        return studentMapper.studentToStudentDto(studentRepo.getOne(id));
         }catch (Exception e){
             throw new StudentPortalException("Problem occurs in getById method on StudentServiceImpl",e);
         }
     }
     @Override
-    public Student save(Student student) throws StudentPortalException {
+    public StudentDto save(Student student) throws StudentPortalException {
         try {
-         return studentRepo.save(student);}catch (Exception e){
+            return studentMapper.studentToStudentDto(studentRepo.save(student));
+        }
+        catch (Exception e){
             throw new StudentPortalException("Problem occurs in save method on StudentServiceImpl",e);
         }
 
     }
     @Override
-    public List<Student> getAll() throws StudentPortalException {
+    public List<StudentDto> getAll() throws StudentPortalException {
         try {
-            return studentRepo.findAll();
+            return studentRepo.findAll().stream().map(studentMapper::studentToStudentDto).collect(Collectors.toList());
         }catch (Exception e){
             throw new StudentPortalException("Problem occurs in getAll method on StudentServiceImpl",e);
         }

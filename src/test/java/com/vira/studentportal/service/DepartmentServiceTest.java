@@ -1,6 +1,7 @@
 package com.vira.studentportal.service;
 
 import com.studentportal.department.Department;
+import com.studentportal.department.DepartmentDto;
 import com.studentportal.department.DepartmentRepo;
 import com.studentportal.department.DepartmentServiceImpl;
 import com.studentportal.exception.StudentPortalException;
@@ -27,8 +28,8 @@ public class DepartmentServiceTest {
     Department department;
     @Before
     public void setup(){
-        department=new Department();
-        departmentList=new ArrayList<>();
+        department = new Department();
+        departmentList = new ArrayList<>();
         department.setDepartmentType("TEST");
         department.setDepartmentName("TEST2");
         departmentList.add(department);
@@ -38,19 +39,19 @@ public class DepartmentServiceTest {
     public void When_Get_Department_Id_Should_Return_Department() throws StudentPortalException {
 
         Mockito.when(departmentRepo.getOne(324L)).thenReturn(department);
-        Department result= departmentServiceImpl.getById(324L);
+        DepartmentDto result = departmentServiceImpl.getById(324L);
         assertThat(result.getDepartmentName()).isSameAs(department.getDepartmentName());
     }
     @Test
     public void When_Save_Department_Should_Return_Department() throws StudentPortalException {
         Mockito.when(departmentRepo.save(department)).thenReturn(department);
-        Department result= departmentServiceImpl.save(department);
+        DepartmentDto result = departmentServiceImpl.save(department);
         assertThat(result.getDepartmentType()).isSameAs(department.getDepartmentType());
     }
     @Test
     public void When_getAll_Department_Should_Return_DepartmnetList() throws StudentPortalException {
         Mockito.when(departmentRepo.findAll()).thenReturn(departmentList);
-        List<Department> result= departmentServiceImpl.getAll();
+        List<DepartmentDto> result = departmentServiceImpl.getAll();
         assertThat(result.get(0).getDepartmentType()).isSameAs(department.getDepartmentType());
     }
 

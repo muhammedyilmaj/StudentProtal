@@ -15,26 +15,26 @@ public class FacultyController {
         this.facultyServiceImpl = facultyServiceImpl;
     }
     @GetMapping("/{facultyId}")
-    public ResponseEntity<Faculty> getById(@PathVariable("facultyId") Long id) throws StudentPortalException {
-        Faculty faculty= facultyServiceImpl.getById(id);
+    public ResponseEntity<FacultyDto> getById(@PathVariable("facultyId") Long id) throws StudentPortalException {
+        FacultyDto faculty = facultyServiceImpl.getById(id);
         if(faculty.getId().equals(id)){
             return  new ResponseEntity<>(faculty, HttpStatus.OK);
         }else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping
-    public ResponseEntity<List<Faculty>> getAll() throws StudentPortalException {
-        List<Faculty> faculties= facultyServiceImpl.getAll();
+    public ResponseEntity<List<FacultyDto>> getAll() throws StudentPortalException {
+        List<FacultyDto> faculties = facultyServiceImpl.getAll();
         if(faculties.size()>0){
             return new ResponseEntity<>(faculties,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PostMapping
-    public ResponseEntity<Faculty> add(@RequestBody Faculty faculty) throws StudentPortalException {
-        Faculty resultfaculty=facultyServiceImpl.add(faculty);
-        if(resultfaculty.getFacultyName().equals(faculty.getFacultyName())){
-            return new ResponseEntity<>(faculty,HttpStatus.CREATED);
+    public ResponseEntity<FacultyDto> add(@RequestBody Faculty faculty) throws StudentPortalException {
+        FacultyDto resultFaculty = facultyServiceImpl.add(faculty);
+        if(resultFaculty.getFacultyName().equals(faculty.getFacultyName())){
+            return new ResponseEntity<>(resultFaculty,HttpStatus.CREATED);
         }else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

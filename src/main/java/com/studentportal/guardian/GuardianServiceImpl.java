@@ -4,33 +4,39 @@ import com.studentportal.exception.StudentPortalException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GuardianServiceImpl implements GuardianService {
+
+    private GuardianMapperImpl guardianMapper;
     private GuardianRepo guardianRepo;
-    public GuardianServiceImpl(GuardianRepo guardianRepo) {
-        this.guardianRepo=guardianRepo;
+
+    public GuardianServiceImpl(GuardianMapperImpl guardianMapper, GuardianRepo guardianRepo) {
+        this.guardianMapper = guardianMapper;
+        this.guardianRepo = guardianRepo;
     }
+
     @Override
-    public Guardian getById(Long id) throws StudentPortalException {
+    public GuardianDto getById(Long id) throws StudentPortalException {
         try{
-            return guardianRepo.getOne(id);
+            return guardianMapper.guardianToGuardianDto(guardianRepo.getOne(id));
         }catch (Exception e) {
             throw new StudentPortalException("Problem occurs in getById method on GuardianServiceImpl", e);
         }
     }
     @Override
-    public List<Guardian> getAll() throws StudentPortalException {
+    public List<GuardianDto> getAll() throws StudentPortalException {
         try {
-         return guardianRepo.findAll();
+         return guardianRepo.findAll().stream().map(guardianMapper::guardianToGuardianDto).collect(Collectors.toList());
         }catch (Exception e) {
             throw new StudentPortalException("Problem occurs in getAll method on GuardianServiceImpl", e);
         }
     }
     @Override
-    public Guardian add(Guardian guardian) throws StudentPortalException {
+    public GuardianDto add(Guardian guardian) throws StudentPortalException {
         try {
-            return guardianRepo.save(guardian);
+            return guardianMapper.guardianToGuardianDto(guardianRepo.save(guardian));
         } catch (Exception e) {
             throw new StudentPortalException("Problem occurs in add method on GuardianServiceImpl", e);
         }

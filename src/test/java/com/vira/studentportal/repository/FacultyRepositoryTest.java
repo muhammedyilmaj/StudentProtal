@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +24,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FacultyRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
-    @Autowired
+    @Resource
     FacultyRepo facultyRepo;
     @Before
     public void setup(){
-        departmentList= new ArrayList<>();
-        department= new Department();
-        faculty= new Faculty();
+        departmentList = new ArrayList<>();
+        department = new Department();
+        faculty = new Faculty();
         department.setDepartmentName("Mock");
         department.setDepartmentType("MASTER");
         departmentList.add(department);

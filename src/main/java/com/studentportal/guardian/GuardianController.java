@@ -14,16 +14,16 @@ public class GuardianController {
         this.guardianServiceImpl = guardianServiceImpl;
     }
     @GetMapping("/{parentId}")
-    public ResponseEntity<Guardian> getById(@PathVariable("parentId") Long id) throws StudentPortalException {
-        Guardian guardian = guardianServiceImpl.getById(id);
+    public ResponseEntity<GuardianDto> getById(@PathVariable("parentId") Long id) throws StudentPortalException {
+        GuardianDto guardian = guardianServiceImpl.getById(id);
         if(guardian.getId().equals(id)){
             return  new ResponseEntity<>(guardian, HttpStatus.OK);
         }else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping
-    public ResponseEntity<List<Guardian>> getAll() throws StudentPortalException {
-        List<Guardian> guardians = guardianServiceImpl.getAll();
+    public ResponseEntity<List<GuardianDto>> getAll() throws StudentPortalException {
+        List<GuardianDto> guardians = guardianServiceImpl.getAll();
         if(guardians.size()>=1){
             return new ResponseEntity<>(guardians,HttpStatus.OK);
         }else
@@ -31,7 +31,7 @@ public class GuardianController {
     }
     @PostMapping
     public ResponseEntity<Void> add(@RequestBody Guardian guardian) throws StudentPortalException {
-       Guardian resultGuardian =guardianServiceImpl.add(guardian);
+       GuardianDto resultGuardian =guardianServiceImpl.add(guardian);
        if(resultGuardian.getName().equals(guardian.getName())){
            return new ResponseEntity<>(HttpStatus.CREATED);
        }else

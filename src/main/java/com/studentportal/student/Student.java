@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "student")
+@Table(name = "students")
 @Data
 @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class Student {
@@ -24,8 +24,8 @@ public class Student {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Guardian parents;
+    @JoinColumn(name = "guardian_id")
+    private Guardian guardian;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departmnet_id")

@@ -24,8 +24,8 @@ public class DepartmentController {
 
 
     @GetMapping("{departmentId}")
-    public ResponseEntity<Department> getById(@PathVariable ("departmentId") Long id) throws StudentPortalException {
-        Department department= departmentService.getById(id);
+    public ResponseEntity<DepartmentDto> getById(@PathVariable ("departmentId") Long id) throws StudentPortalException {
+        DepartmentDto department = departmentService.getById(id);
         if(department.getId().equals(id)){
             return  new ResponseEntity<>(department,HttpStatus.OK);
         }else
@@ -33,16 +33,16 @@ public class DepartmentController {
 
     }
     @GetMapping("name/{departmentName}")
-    public ResponseEntity<Department> getByName(@PathVariable ("departmentName") String departmentName) throws StudentPortalException, StudentPortalException {
-        Department department= departmentService.getByName(departmentName);
+    public ResponseEntity<DepartmentDto> getByName(@PathVariable ("departmentName") String departmentName) throws StudentPortalException, StudentPortalException {
+        DepartmentDto department = departmentService.getByName(departmentName);
         if (department.getDepartmentName().equals(departmentName)){
             return new ResponseEntity<>(department,HttpStatus.OK);
         }else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping
-    public ResponseEntity<List<Department>> getAll() throws StudentPortalException {
-        List<Department> departmentList= departmentService.getAll();
+    public ResponseEntity<List<DepartmentDto>> getAll() throws StudentPortalException {
+        List<DepartmentDto> departmentList = departmentService.getAll();
         if(departmentList.size()<1){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -50,8 +50,8 @@ public class DepartmentController {
             return new ResponseEntity<>(departmentList, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<Department> save(@RequestBody Department department) throws StudentPortalException {
-        Department result= departmentService.save(department);
+    public ResponseEntity<DepartmentDto> save(@RequestBody Department department) throws StudentPortalException {
+        DepartmentDto result = departmentService.save(department);
         if(result.getDepartmentName().equals(department.getDepartmentName())){
             return new ResponseEntity<>(result, HttpStatus.CREATED);
         }else

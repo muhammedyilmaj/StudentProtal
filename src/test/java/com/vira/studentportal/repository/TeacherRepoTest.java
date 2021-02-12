@@ -34,12 +34,12 @@ public class TeacherRepoTest {
         teacher.setStudents(studentList);
         teacher.setTeacherName("banbala");
     }
-    Teacher teacher=new Teacher();
-    Student student= new Student();
-    List<Student> studentList=new ArrayList<>();
+    Teacher teacher = new Teacher();
+    Student student = new Student();
+    List<Student> studentList = new ArrayList<>();
     @Test
     public void ADD_AND_GET_STUDENT_BY_ID(){
-        teacher=testEntityManager.persistAndFlush(teacher);
+        teacher = testEntityManager.persistAndFlush(teacher);
         assertThat(teacherRepo.getOne(teacher.getId()).getId()).isEqualTo(teacher.getId());
     }
 }

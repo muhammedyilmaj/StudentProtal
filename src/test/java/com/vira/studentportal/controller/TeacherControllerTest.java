@@ -2,9 +2,8 @@ package com.vira.studentportal.controller;
 
 import com.studentportal.exception.StudentPortalException;
 import com.studentportal.student.Student;
-import com.studentportal.teacher.Teacher;
-import com.studentportal.teacher.TeacherController;
-import com.studentportal.teacher.TeacherServiceImpl;
+import com.studentportal.student.StudentDto;
+import com.studentportal.teacher.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TeacherControllerTest {
+
     @Mock
     TeacherServiceImpl teacherService;
     @InjectMocks
@@ -33,20 +33,31 @@ public class TeacherControllerTest {
         teacher.setStudents(studentList);
         teacher.setTeacherName("banbala");
         teacher.setId(54L);
+        studentDto.setName("adsf");
+        studentDto.setGrade("asdfsdf");
+        studentDto.setId(45L);
+        studentListDto.add(studentDto);
+        teacherDto.setStudents(studentList);
+        teacherDto.setTeacherName("banbala");
+        teacherDto.setId(54L);
     }
 
     Teacher teacher = new Teacher();
     Student student= new Student();
     List<Student> studentList= new ArrayList<>();
+
+    TeacherDto teacherDto = new TeacherDto();
+    StudentDto studentDto = new StudentDto();
+    List<StudentDto> studentListDto = new ArrayList<>();
     @Test
     public void Add_Teacher() throws StudentPortalException {
-        Mockito.when(teacherService.add(Mockito.any(Teacher.class))).thenReturn(teacher);
+        Mockito.when(teacherService.add(Mockito.any(Teacher.class))).thenReturn(teacherDto);
         assertThat(teacherController.add(teacher).getStatusCodeValue()).isEqualTo(201);
     }
 
     @Test
     public void Get_Teacher_By_Teacher_Id() throws StudentPortalException {
-        Mockito.when(teacherService.getById(Mockito.any(Long.class))).thenReturn(teacher);
+        Mockito.when(teacherService.getById(Mockito.any(Long.class))).thenReturn(teacherDto);
         assertThat(teacherController.getById(teacher.getId()).getStatusCodeValue()).isEqualTo(200);
     }
 
