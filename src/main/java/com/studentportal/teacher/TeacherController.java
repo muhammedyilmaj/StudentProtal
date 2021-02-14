@@ -29,7 +29,7 @@ public class TeacherController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT); }
     }
     @PostMapping
-    public ResponseEntity<Void> add(@RequestBody Teacher teacher) throws StudentPortalException {
+    public ResponseEntity<Void> add(@RequestBody TeacherDto teacher) throws StudentPortalException {
         TeacherDto newTeacher = teacherServiceImpl.add(teacher);
         if(newTeacher.getTeacherName().equals(teacher.getTeacherName())) {
             return new ResponseEntity<>(HttpStatus.CREATED);

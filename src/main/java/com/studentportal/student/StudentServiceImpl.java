@@ -26,8 +26,9 @@ public class StudentServiceImpl implements StudentService {
         }
     }
     @Override
-    public StudentDto save(Student student) throws StudentPortalException {
+    public StudentDto save(StudentDto studentDto) throws StudentPortalException {
         try {
+            Student student = studentMapper.studentDtoToStudent(studentDto);
             return studentMapper.studentToStudentDto(studentRepo.save(student));
         }
         catch (Exception e){

@@ -32,8 +32,8 @@ public class LessonControllerTest {
     LessonDto lessonDto = new LessonDto();
     @Test
     public void Add_Lesson() throws StudentPortalException {
-        Mockito.when(lessonService.save(Mockito.any(Lesson.class))).thenReturn(lessonDto);
-        assertThat(lessonController.add(lesson).getStatusCodeValue()).isEqualTo(201);
+        Mockito.when(lessonService.save(Mockito.any(LessonDto.class))).thenReturn(lessonDto);
+        assertThat(lessonController.add(lessonDto).getStatusCodeValue()).isEqualTo(201);
     }
 
     @Test

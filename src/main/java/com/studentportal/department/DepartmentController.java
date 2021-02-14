@@ -50,7 +50,7 @@ public class DepartmentController {
             return new ResponseEntity<>(departmentList, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<DepartmentDto> save(@RequestBody Department department) throws StudentPortalException {
+    public ResponseEntity<DepartmentDto> save(@RequestBody DepartmentDto department) throws StudentPortalException {
         DepartmentDto result = departmentService.save(department);
         if(result.getDepartmentName().equals(department.getDepartmentName())){
             return new ResponseEntity<>(result, HttpStatus.CREATED);

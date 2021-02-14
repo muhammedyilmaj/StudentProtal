@@ -48,9 +48,10 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public FacultyDto add(Faculty faculty) throws StudentPortalException {
+    public FacultyDto add(FacultyDto facultyDto) throws StudentPortalException {
         try {
-           return facultyMapper.facultyToFacultyDto(facultyRepo.save(faculty));
+            Faculty faculty = facultyMapper.facultyDtoToFaculty(facultyDto);
+            return facultyMapper.facultyToFacultyDto(facultyRepo.save(faculty));
         } catch (Exception e) {
             throw new StudentPortalException("Problem occurs in add method on FacultyServiceImpl", e);
         } }

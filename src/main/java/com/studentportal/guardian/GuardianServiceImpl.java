@@ -34,8 +34,9 @@ public class GuardianServiceImpl implements GuardianService {
         }
     }
     @Override
-    public GuardianDto add(Guardian guardian) throws StudentPortalException {
+    public GuardianDto add(GuardianDto guardianDto) throws StudentPortalException {
         try {
+            Guardian guardian = guardianMapper.guardianDtoToGuardian(guardianDto);
             return guardianMapper.guardianToGuardianDto(guardianRepo.save(guardian));
         } catch (Exception e) {
             throw new StudentPortalException("Problem occurs in add method on GuardianServiceImpl", e);

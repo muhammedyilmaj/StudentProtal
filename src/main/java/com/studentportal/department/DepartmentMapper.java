@@ -12,4 +12,5 @@ public interface DepartmentMapper {
     DepartmentMapper INSTANCE = Mappers.getMapper(DepartmentMapper.class);
 
     DepartmentDto departmentToDepartmentDto(Department department);
+    Department departmentDtoToDepartment(DepartmentDto departmentDto);
 }

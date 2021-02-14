@@ -1,5 +1,7 @@
 package com.studentportal.lesson;
 
+import com.studentportal.faculty.Faculty;
+import com.studentportal.faculty.FacultyDto;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -7,16 +9,36 @@ public class LessonMapperImpl implements LessonMapper {
 
     @Override
     public LessonDto lessonToLessonDto(Lesson lesson) {
-        if( lesson == null ) {
-            return null;
-        }
-        LessonDto lessonDto = new LessonDto();
-        lessonDto.setId(lesson.getId());
-        lessonDto.setDepartment(lesson.getDepartment());
-        lessonDto.setLessonClass(lesson.getLessonClass());
-        lessonDto.setLessonName(lesson.getLessonName());
-        lessonDto.setTeachers(lesson.getTeachers());
-        return lessonDto;
+        return (LessonDto) converter(lesson);
     }
 
+    @Override
+    public Lesson lessonDtoToLesson(LessonDto lessonDto) {
+        return (Lesson) converter(lessonDto);
+    }
+
+    private Object converter(Object object) {
+
+        if (object instanceof Lesson) {
+            LessonDto lessonDto = new LessonDto();
+            lessonDto.setId(((Lesson) object).getId());
+            lessonDto.setDepartment(((Lesson) object).getDepartment());
+            lessonDto.setLessonClass(((Lesson) object).getLessonClass());
+            lessonDto.setLessonName(((Lesson) object).getLessonName());
+            lessonDto.setTeachers(((Lesson) object).getTeachers());
+            return lessonDto;
+        }
+        else if (object instanceof LessonDto) {
+            Lesson lesson = new Lesson();
+            lesson.setId(((LessonDto) object).getId());
+            lesson.setDepartment(((LessonDto) object).getDepartment());
+            lesson.setLessonClass(((LessonDto) object).getLessonClass());
+            lesson.setLessonName(((LessonDto) object).getLessonName());
+            lesson.setTeachers(((LessonDto) object).getTeachers());
+            return lesson;
+        }
+        else {
+            return null;
+        }
+    }
 }

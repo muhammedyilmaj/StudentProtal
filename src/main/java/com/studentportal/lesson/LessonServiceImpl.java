@@ -33,8 +33,9 @@ public class LessonServiceImpl implements LessonService {
         }
     }
     @Override
-    public LessonDto save(Lesson lesson) throws StudentPortalException {
+    public LessonDto save(LessonDto lessonDto) throws StudentPortalException {
         try {
+            Lesson lesson = lessonMapper.lessonDtoToLesson(lessonDto);
             return lessonMapper.lessonToLessonDto(lessonRepo.save(lesson));
         } catch (Exception e){
         throw new StudentPortalException("Problem occurs in getAll method on LessonServiceImpl",e);

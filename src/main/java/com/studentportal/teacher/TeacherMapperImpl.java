@@ -10,11 +10,33 @@ public class TeacherMapperImpl implements TeacherMapper{
         if( teacher == null ) {
             return null;
         }
-        TeacherDto teacherDto= new TeacherDto();
-        teacherDto.setId(teacher.getId());
-        teacherDto.setLessons(teacher.getLessons());
-        teacherDto.setStudents(teacher.getStudents());
-        teacherDto.setTeacherName(teacher.getTeacherName());
-        return teacherDto;
+        return (TeacherDto)converter(teacher);
+    }
+
+    @Override
+    public Teacher teacherDtoToTeacher(TeacherDto teacher) {
+        return (Teacher)converter(teacher);
+    }
+    private Object converter(Object object) {
+
+        if (object instanceof Teacher) {
+            TeacherDto teacherDto = new TeacherDto();
+            teacherDto.setId(((Teacher) object).getId());
+            teacherDto.setLessons(((Teacher) object).getLessons());
+            teacherDto.setStudents(((Teacher) object).getStudents());
+            teacherDto.setTeacherName(((Teacher) object).getTeacherName());
+            return teacherDto;
+        }
+        else if (object instanceof TeacherDto) {
+            Teacher teacher = new Teacher();
+            teacher.setId(((TeacherDto) object).getId());
+            teacher.setLessons(((TeacherDto) object).getLessons());
+            teacher.setStudents(((TeacherDto) object).getStudents());
+            teacher.setTeacherName(((TeacherDto) object).getTeacherName());
+            return teacher;
+        }
+        else {
+            return null;
+        }
     }
 }

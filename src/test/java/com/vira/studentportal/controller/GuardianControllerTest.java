@@ -52,8 +52,8 @@ public class GuardianControllerTest {
     List<StudentDto> studentListDto = new ArrayList<>();
     @Test
     public void Add_Guardian() throws StudentPortalException {
-        Mockito.when(guardianService.add(Mockito.any(Guardian.class))).thenReturn(guardianDto);
-        assertThat(guardianController.add(guardian).getStatusCodeValue()).isEqualTo(201);
+        Mockito.when(guardianService.add(Mockito.any(GuardianDto.class))).thenReturn(guardianDto);
+        assertThat(guardianController.add(guardianDto).getStatusCodeValue()).isEqualTo(201);
     }
 
     @Test

@@ -29,7 +29,7 @@ public class LessonController {
             return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PostMapping
-    public ResponseEntity<LessonDto> add(@RequestBody Lesson lesson) throws StudentPortalException {
+    public ResponseEntity<LessonDto> add(@RequestBody LessonDto lesson) throws StudentPortalException {
         LessonDto createdLesson = lessonServiceImpl.save(lesson);
         if(createdLesson.getLessonName().equals(lesson.getLessonName())) {
             return new ResponseEntity<>(createdLesson,HttpStatus.CREATED);

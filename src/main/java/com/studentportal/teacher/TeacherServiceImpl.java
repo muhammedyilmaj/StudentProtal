@@ -33,8 +33,9 @@ public class TeacherServiceImpl implements TeacherService {
         }
     }
     @Override
-    public TeacherDto add(Teacher teacher) throws StudentPortalException {
+    public TeacherDto add(TeacherDto teacherDto) throws StudentPortalException {
         try {
+            Teacher teacher = teacherMapper.teacherDtoToTeacher(teacherDto);
             return teacherMapper.teacherToTeacherDto(teacherRepo.save(teacher));
         }catch (Exception e){
             throw new StudentPortalException("Problem occurs in add method on TeacherServiceImpl",e);

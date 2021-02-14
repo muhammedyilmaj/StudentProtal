@@ -1,9 +1,6 @@
 package com.vira.studentportal.service;
 
-import com.studentportal.department.Department;
-import com.studentportal.department.DepartmentDto;
-import com.studentportal.department.DepartmentRepo;
-import com.studentportal.department.DepartmentServiceImpl;
+import com.studentportal.department.*;
 import com.studentportal.exception.StudentPortalException;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +21,8 @@ public class DepartmentServiceTest {
     DepartmentServiceImpl departmentServiceImpl;
     @Mock
     DepartmentRepo departmentRepo;
+    @Mock
+    DepartmentMapperImpl departmentMapper;
     List<Department> departmentList;
     Department department;
     @Before
@@ -45,7 +44,7 @@ public class DepartmentServiceTest {
     @Test
     public void When_Save_Department_Should_Return_Department() throws StudentPortalException {
         Mockito.when(departmentRepo.save(department)).thenReturn(department);
-        DepartmentDto result = departmentServiceImpl.save(department);
+        DepartmentDto result = departmentServiceImpl.save(departmentMapper.departmentToDepartmentDto(department));
         assertThat(result.getDepartmentType()).isSameAs(department.getDepartmentType());
     }
     @Test

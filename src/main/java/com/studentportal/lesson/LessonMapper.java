@@ -9,4 +9,6 @@ public interface LessonMapper {
     LessonMapper INSTANCE = Mappers.getMapper(LessonMapper.class);
 
     LessonDto lessonToLessonDto(Lesson lesson);
+    Lesson lessonDtoToLesson(LessonDto lessonDto);
+
 }

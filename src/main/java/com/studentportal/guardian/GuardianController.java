@@ -30,9 +30,9 @@ public class GuardianController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PostMapping
-    public ResponseEntity<Void> add(@RequestBody Guardian guardian) throws StudentPortalException {
-       GuardianDto resultGuardian =guardianServiceImpl.add(guardian);
-       if(resultGuardian.getName().equals(guardian.getName())){
+    public ResponseEntity<Void> add(@RequestBody GuardianDto guardianDto) throws StudentPortalException {
+       GuardianDto resultGuardian = guardianServiceImpl.add(guardianDto);
+       if(resultGuardian.getName().equals(guardianDto.getName())){
            return new ResponseEntity<>(HttpStatus.CREATED);
        }else
            return new ResponseEntity<>(HttpStatus.NO_CONTENT);

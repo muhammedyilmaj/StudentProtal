@@ -55,8 +55,8 @@ public class FacultyControllerTest {
     List<DepartmentDto> departmentListDto;
     @Test
     public void Add_Faculty() throws StudentPortalException {
-        Mockito.when(facultyService.add(Mockito.any(Faculty.class))).thenReturn(facultyDto);
-        assertThat(facultyController.add(faculty).getStatusCodeValue()).isEqualTo(201);
+        Mockito.when(facultyService.add(Mockito.any(FacultyDto.class))).thenReturn(facultyDto);
+        assertThat(facultyController.add(facultyDto).getStatusCodeValue()).isEqualTo(201);
     }
     @Test
     public void Get_Faculty_By_Faculty_Id() throws StudentPortalException {

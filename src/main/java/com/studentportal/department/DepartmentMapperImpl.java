@@ -9,17 +9,40 @@ public class DepartmentMapperImpl implements DepartmentMapper {
 
     @Override
     public DepartmentDto departmentToDepartmentDto(Department department) {
-        if( department == null ) {
+        return (DepartmentDto) converter(department);
+    }
+
+    @Override
+    public Department departmentDtoToDepartment(DepartmentDto departmentDto) {
+        return (Department) converter(departmentDto);
+    }
+
+    private Object converter(Object object) {
+
+        if (object instanceof Department) {
+            DepartmentDto departmentDto= new DepartmentDto();
+            departmentDto.setId(((Department) object).getId());
+            departmentDto.setLessons(((Department) object).getLessons());
+            departmentDto.setStudents(((Department) object).getStudents());
+            departmentDto.setFaculty(((Department) object).getFaculty());
+            departmentDto.setDepartmentName(((Department) object).getDepartmentName());
+            departmentDto.setDepartmentType(((Department) object).getDepartmentType());
+            return departmentDto;
+        }
+        else if (object instanceof DepartmentDto) {
+            Department department = new Department();
+            department.setId(((DepartmentDto) object).getId());
+            department.setLessons(((DepartmentDto) object).getLessons());
+            department.setStudents(((DepartmentDto) object).getStudents());
+            department.setFaculty(((DepartmentDto) object).getFaculty());
+            department.setDepartmentName(((DepartmentDto) object).getDepartmentName());
+            department.setDepartmentType(((DepartmentDto) object).getDepartmentType());
+            return department;
+        }
+        else {
             return null;
         }
-        DepartmentDto departmentDto= new DepartmentDto();
-        departmentDto.setId(department.getId());
-        departmentDto.setLessons(department.getLessons());
-        departmentDto.setStudents(department.getStudents());
-        departmentDto.setFaculty(department.getFaculty());
-        departmentDto.setDepartmentName(department.getDepartmentName());
-        departmentDto.setDepartmentType(department.getDepartmentType());
-        return departmentDto;
     }
+
 
 }

@@ -34,8 +34,8 @@ public class DepartmentControllerTest {
     }
     @Test
     public void Add_Department() throws StudentPortalException {
-        Mockito.when(departmentService.save(Mockito.any(Department.class))).thenReturn(departmentDto);
-        assertThat(departmentController.save(department).getStatusCodeValue()).isEqualTo(201);
+        Mockito.when(departmentService.save(Mockito.any(DepartmentDto.class))).thenReturn(departmentDto);
+        assertThat(departmentController.save(departmentDto).getStatusCodeValue()).isEqualTo(201);
     }
     @Test
     public void Get_Department_By_Department_Id() throws StudentPortalException {

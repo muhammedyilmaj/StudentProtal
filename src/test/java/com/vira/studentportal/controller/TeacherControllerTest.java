@@ -51,8 +51,8 @@ public class TeacherControllerTest {
     List<StudentDto> studentListDto = new ArrayList<>();
     @Test
     public void Add_Teacher() throws StudentPortalException {
-        Mockito.when(teacherService.add(Mockito.any(Teacher.class))).thenReturn(teacherDto);
-        assertThat(teacherController.add(teacher).getStatusCodeValue()).isEqualTo(201);
+        Mockito.when(teacherService.add(Mockito.any(TeacherDto.class))).thenReturn(teacherDto);
+        assertThat(teacherController.add(teacherDto).getStatusCodeValue()).isEqualTo(201);
     }
 
     @Test

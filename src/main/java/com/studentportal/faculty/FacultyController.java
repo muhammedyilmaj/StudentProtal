@@ -31,7 +31,7 @@ public class FacultyController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PostMapping
-    public ResponseEntity<FacultyDto> add(@RequestBody Faculty faculty) throws StudentPortalException {
+    public ResponseEntity<FacultyDto> add(@RequestBody FacultyDto faculty) throws StudentPortalException {
         FacultyDto resultFaculty = facultyServiceImpl.add(faculty);
         if(resultFaculty.getFacultyName().equals(faculty.getFacultyName())){
             return new ResponseEntity<>(resultFaculty,HttpStatus.CREATED);

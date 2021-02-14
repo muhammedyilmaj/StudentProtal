@@ -31,8 +31,8 @@ public class StudentController {
 
     }
     @PostMapping
-    public ResponseEntity<Void> add(@RequestBody Student student) throws StudentPortalException {
-        StudentDto responseStudent=studentServiceImpl.save(student);
+    public ResponseEntity<Void> add(@RequestBody StudentDto student) throws StudentPortalException {
+        StudentDto responseStudent = studentServiceImpl.save(student);
         if(responseStudent.getName().equals(student.getName())){
             return new ResponseEntity<>(HttpStatus.CREATED);}
          else

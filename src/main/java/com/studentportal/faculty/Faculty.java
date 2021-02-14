@@ -20,7 +20,6 @@ public class Faculty {
     @NotNull
     @Column(name = "faculty_name")
     private String facultyName;
-    @ToString.Exclude
     @OneToMany(mappedBy = "faculty")
     List<Department> department;
 

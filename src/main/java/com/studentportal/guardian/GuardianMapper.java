@@ -9,4 +9,5 @@ public interface GuardianMapper {
     GuardianMapper INSTANCE = Mappers.getMapper(GuardianMapper.class);
 
     GuardianDto guardianToGuardianDto(Guardian faculty);
+    Guardian guardianDtoToGuardian(GuardianDto guardianDto);
 }
