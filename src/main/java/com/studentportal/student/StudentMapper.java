@@ -1,10 +1,10 @@
 package com.studentportal.student;
 
-import com.studentportal.lesson.Lesson;
-import com.studentportal.lesson.LessonDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
+@Component
 @Mapper
 public interface StudentMapper {
 

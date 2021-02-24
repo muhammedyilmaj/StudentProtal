@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 @Service
 public class GuardianServiceImpl implements GuardianService {
 
-    private GuardianMapperImpl guardianMapper;
+    private GuardianMapper guardianMapper;
     private GuardianRepo guardianRepo;
 
-    public GuardianServiceImpl(GuardianMapperImpl guardianMapper, GuardianRepo guardianRepo) {
+    public GuardianServiceImpl(GuardianRepo guardianRepo, GuardianMapper guardianMapper) {
         this.guardianMapper = guardianMapper;
         this.guardianRepo = guardianRepo;
     }

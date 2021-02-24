@@ -1,33 +1,33 @@
 package com.vira.studentportal.service;
 
 import com.studentportal.exception.StudentPortalException;
-import com.studentportal.guardian.Guardian;
-import com.studentportal.guardian.GuardianDto;
-import com.studentportal.guardian.GuardianRepo;
-import com.studentportal.guardian.GuardianServiceImpl;
+import com.studentportal.guardian.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class GuardianServiceImplTest {
 
-    @InjectMocks
     GuardianServiceImpl guardianService;
+
     @Mock
     GuardianRepo guardianRepo;
     Guardian guardian = new Guardian();
     List<Guardian> guardianList;
     @Before
     public void setup(){
+        MockitoAnnotations.initMocks(this);
+        guardianService = new GuardianServiceImpl(guardianRepo, GuardianMapper.INSTANCE);
         guardian = new Guardian();
         guardianList = new ArrayList<>();
         guardian.setName("TEST");
@@ -36,15 +36,15 @@ public class GuardianServiceImplTest {
     }
     @Test
     public void When_Save_Guardian_it_Should_Return_Guardian() throws StudentPortalException {
-        Mockito.when(guardianRepo.getOne(guardian.getId())).thenReturn(guardian);
-        GuardianDto result = guardianService.getById(guardian.getId());
+        when(guardianRepo.save(guardian)).thenReturn(guardian);
+        GuardianDto result = guardianService.add(GuardianMapper.INSTANCE.guardianToGuardianDto(guardian));
         assertThat(result.getName()).isSameAs(guardian.getName());
     }
 
     @Test
     public void When_Get_Guardian_Id_Should_Return_Guardian() throws StudentPortalException {
 
-        Mockito.when(guardianRepo.getOne(324L)).thenReturn(guardian);
+        Mockito.when(guardianRepo.getOne(anyLong())).thenReturn(guardian);
         GuardianDto result = guardianService.getById(324L);
         assertThat(result.getId()).isSameAs(guardian.getId());
     }

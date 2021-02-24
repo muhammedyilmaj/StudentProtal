@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    private StudentMapperImpl studentMapper;
+    private StudentMapper studentMapper;
     private StudentRepo studentRepo;
 
-    public StudentServiceImpl(StudentMapperImpl studentMapper, StudentRepo studentRepo) {
+    public StudentServiceImpl( StudentRepo studentRepo, StudentMapper studentMapper) {
         this.studentMapper = studentMapper;
         this.studentRepo = studentRepo;
     }

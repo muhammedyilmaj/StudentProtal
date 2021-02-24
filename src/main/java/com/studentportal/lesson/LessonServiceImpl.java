@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 @Service
 public class LessonServiceImpl implements LessonService {
 
-    private LessonMapperImpl lessonMapper;
+    private LessonMapper lessonMapper;
     private LessonRepo lessonRepo;
 
-    public LessonServiceImpl(LessonMapperImpl lessonMapper, LessonRepo lessonRepo) {
+    public LessonServiceImpl(LessonRepo lessonRepo, LessonMapper lessonMapper) {
         this.lessonMapper = lessonMapper;
         this.lessonRepo = lessonRepo;
     }

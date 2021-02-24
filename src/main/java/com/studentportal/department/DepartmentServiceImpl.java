@@ -5,20 +5,22 @@ import java.util.stream.Collectors;
 
 import com.studentportal.exception.StudentPortalException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private DepartmentMapperImpl departmentMapper;
-    private DepartmentRepo departmentRepo;
-    public DepartmentServiceImpl(DepartmentRepo departmentRepo, DepartmentMapperImpl departmentMapper){
+    private final DepartmentMapper departmentMapper;
+    private final DepartmentRepo departmentRepo;
+    @Autowired
+    public DepartmentServiceImpl(DepartmentRepo departmentRepo, DepartmentMapper departmentMapper){
         this.departmentRepo = departmentRepo;
         this.departmentMapper = departmentMapper;
     }
     @Override
     public DepartmentDto getById(Long id) throws StudentPortalException {
-        try {
+         try {
             return departmentMapper.departmentToDepartmentDto(departmentRepo.getOne(id));
         } catch (Exception e){
             throw new StudentPortalException("Problem occurs in getAll method on DepartmentServiceImpl",e);

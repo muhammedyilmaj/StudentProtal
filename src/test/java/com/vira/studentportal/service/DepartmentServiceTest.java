@@ -5,10 +5,12 @@ import com.studentportal.exception.StudentPortalException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +19,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DepartmentServiceTest {
-    @InjectMocks
+
     DepartmentServiceImpl departmentServiceImpl;
     @Mock
     DepartmentRepo departmentRepo;
-    @Mock
-    DepartmentMapperImpl departmentMapper;
+
     List<Department> departmentList;
     Department department;
     @Before
     public void setup(){
+        MockitoAnnotations.initMocks(this);
+        departmentServiceImpl = new DepartmentServiceImpl(departmentRepo, DepartmentMapper.INSTANCE);
         department = new Department();
         departmentList = new ArrayList<>();
         department.setDepartmentType("TEST");
@@ -37,14 +40,14 @@ public class DepartmentServiceTest {
     @Test
     public void When_Get_Department_Id_Should_Return_Department() throws StudentPortalException {
 
-        Mockito.when(departmentRepo.getOne(324L)).thenReturn(department);
+        when(departmentRepo.getOne(anyLong())).thenReturn(department);
         DepartmentDto result = departmentServiceImpl.getById(324L);
         assertThat(result.getDepartmentName()).isSameAs(department.getDepartmentName());
     }
     @Test
     public void When_Save_Department_Should_Return_Department() throws StudentPortalException {
-        Mockito.when(departmentRepo.save(department)).thenReturn(department);
-        DepartmentDto result = departmentServiceImpl.save(departmentMapper.departmentToDepartmentDto(department));
+        when(departmentRepo.save(department)).thenReturn(department);
+        DepartmentDto result = departmentServiceImpl.save(DepartmentMapper.INSTANCE.departmentToDepartmentDto(department));
         assertThat(result.getDepartmentType()).isSameAs(department.getDepartmentType());
     }
     @Test

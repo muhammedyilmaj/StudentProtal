@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 @Service
 public class TeacherServiceImpl implements TeacherService {
     private TeacherRepo teacherRepo;
-    private TeacherMapperImpl teacherMapper;
-    public TeacherServiceImpl(TeacherRepo teacherRepo, TeacherMapperImpl teacherMapper){
+    private TeacherMapper teacherMapper;
+    public TeacherServiceImpl(TeacherRepo teacherRepo, TeacherMapper teacherMapper){
         this.teacherRepo = teacherRepo;
         this.teacherMapper = teacherMapper;
     }
