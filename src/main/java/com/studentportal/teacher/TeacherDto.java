@@ -1,7 +1,7 @@
 package com.studentportal.teacher;
 
-import com.studentportal.lesson.Lesson;
-import com.studentportal.student.Student;
+import com.studentportal.lesson.LessonDto;
+import com.studentportal.student.StudentDto;
 import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.List;
 public class TeacherDto {
 
     private Long id;
-    private List<Student> students;
-    private List<Lesson> lessons= new ArrayList<>();
+    private List<StudentDto> students;
+    private List<LessonDto> lessons= new ArrayList<>();
     private String teacherName;
 
 }
