@@ -44,7 +44,7 @@ public class FacultyControllerTest {
         departmentListDto.add(departmentDto);
         facultyDto.setFacultyName("Mock");
         facultyDto.setId(34L);
-        facultyDto.setDepartment(departmentList);
+        facultyDto.setDepartment(departmentListDto);
     }
     Faculty faculty;
     Department department;

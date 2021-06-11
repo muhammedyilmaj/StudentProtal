@@ -38,14 +38,15 @@ public class GuardianControllerTest {
         studentDto.setName("muhammed");
         studentDto.setGrade("son");
         studentListDto.add(studentDto);
-        guardianDto.setStudents(studentList);
+
+        guardianDto.setStudents(studentListDto);
         guardianDto.setName("Mock");
         guardianDto.setId(34L);
     }
 
     Guardian guardian = new Guardian();
-    Student student=new Student();
-    List<Student> studentList=new ArrayList<>();
+    Student student = new Student();
+    List<Student> studentList = new ArrayList<>();
 
     GuardianDto guardianDto = new GuardianDto();
     StudentDto studentDto = new StudentDto();

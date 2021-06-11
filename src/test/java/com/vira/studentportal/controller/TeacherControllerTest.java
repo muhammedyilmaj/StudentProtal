@@ -37,7 +37,7 @@ public class TeacherControllerTest {
         studentDto.setGrade("asdfsdf");
         studentDto.setId(45L);
         studentListDto.add(studentDto);
-        teacherDto.setStudents(studentList);
+        teacherDto.setStudents(studentListDto);
         teacherDto.setTeacherName("banbala");
         teacherDto.setId(54L);
     }

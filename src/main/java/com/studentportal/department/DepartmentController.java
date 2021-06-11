@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
-@RequestMapping("/departments")
+@RequestMapping(path = {"/departments"}, produces = {"application/json"})
 public class DepartmentController {
     private DepartmentServiceImpl departmentService;
     public DepartmentController(DepartmentServiceImpl departmentService){
